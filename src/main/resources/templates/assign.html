@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Назначение студента</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #eef2f3, #d9e2ec);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            width: 450px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Назначение на курс</h1>
+
+    <form th:action="@{/assign}" method="post">
+
+        <label for="student">Студент</label>
+        <select id="student" name="studentId" required>
+            <option value="" disabled selected>Выберите студента</option>
+            <option th:each="s : ${students}"
+                    th:value="${s.id}"
+                    th:text="${s.firstName + ' ' + s.lastName}">
+            </option>
+        </select>
+
+        <label for="course">Курс</label>
+        <select id="course" name="courseId" required>
+            <option value="" disabled selected>Выберите курс</option>
+            <option th:each="c : ${courses}"
+                    th:value="${c.id}"
+                    th:text="${c.title}">
+            </option>
+        </select>
+
+        <button type="submit">Сохранить назначение</button>
+
+    </form>
+
+    <div class="footer">
+        <a th:href="@{/}">Вернуться на главную</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список курсов</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f4f6f9;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .add-course {
+            display: block;
+            width: 180px;
+            margin: 0 auto 25px auto;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .add-course:hover {
+            background-color: #357abd;
+            transform: translateY(-3px);
+        }
+
+        .course-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr auto;
+            align-items: center;
+        }
+
+        .course-card div {
+            padding: 6px 10px;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        .course-card a {
+            text-decoration: none;
+            color: #4a90e2;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .course-card a:hover {
+            color: #357abd;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #4a90e2;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Заголовки карточек */
+        .card-header {
+            font-weight: bold;
+            color: #34495e;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Список курсов</h1>
+
+<a href="/courses/new" class="add-course">Добавить курс</a>
+
+<!-- Заголовки -->
+<div class="course-card card-header">
+    <div>ID</div>
+    <div>Название</div>
+    <div>Кредиты</div>
+    <div>Студентов</div>
+    <div>Уроков</div>
+    <div></div>
+</div>
+
+<!-- Список курсов -->
+<div th:each="c : ${courses}" class="course-card">
+    <div th:text="${c.id}"></div>
+    <div th:text="${c.title}"></div>
+    <div th:text="${c.credits}"></div>
+    <div th:text="${#lists.size(c.students)}"></div>
+    <div th:text="${#lists.size(c.lessons)}"></div>
+    <div>
+        <a th:href="@{/courses/{id}/lessons/new(id=${c.id})}">+ урок</a>
+    </div>
+</div>
+
+<div class="back-link">
+    <a th:href="@{/}">← На главную</a>
+</div>
+
+</body>
+</html>

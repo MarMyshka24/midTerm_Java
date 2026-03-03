@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление курса</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", Arial, sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            background: #ffffff;
+            width: 420px;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .wrapper h1 {
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 22px;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #dcdcdc;
+            font-size: 14px;
+            transition: border 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #4a90e2;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #357abd;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #4a90e2;
+            font-size: 14px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h1>Новый курс</h1>
+
+    <form th:action="@{/courses}" th:object="${course}" method="post">
+
+        <div class="form-group">
+            <label>Название курса</label>
+            <input th:field="*{title}" required />
+        </div>
+
+        <div class="form-group">
+            <label>Количество кредитов</label>
+            <input type="number" th:field="*{credits}" required />
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Сохранить курс
+        </button>
+
+    </form>
+
+    <div class="back-link">
+        <a th:href="@{/courses}">← Вернуться к списку курсов</a>
+    </div>
+</div>
+
+</body>
+</html>
